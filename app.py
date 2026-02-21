@@ -4,7 +4,7 @@ def conectar_db():
     try:
         conn = psycopg2.connect(
             host="i2lsdudjty.loclx.io",
-            port="80",
+            port=80,
             database="Consultorio_db",
             user="bryan",
             password="tesis123",
