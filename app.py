@@ -4,10 +4,10 @@ def conectar_db():
     try:
         conn = psycopg2.connect(
             host="vgzmhpsa1u.loclx.io",
-            port=80,
+            port="80",
             database="Consultorio_db",
             user="bryan",
-            password="123",
+            password="tesis123",
             connect_timeout=10
         )
         return conn
