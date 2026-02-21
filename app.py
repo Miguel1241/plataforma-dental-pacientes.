@@ -5,7 +5,7 @@ def conectar_db():
         conn = psycopg2.connect(
             host="vgzmhpsa1u.loclx.io",
             port=80,
-            database="odontologia",
+            database="Clinica Dental",
             user="bryan",
             password="123",
             connect_timeout=10
