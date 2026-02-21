@@ -3,7 +3,11 @@ import psycopg2
 def conectar_db():
     try:
         conn = psycopg2.connect(
-            "dbname='Consultorio_db' user='bryan' password='tesis123' host='i2lsdudjty.loclx.io' port='80'"
+            host="dncz6ejujh.loclx.io",
+            port=80,
+            database="Consultorio_db",
+            user="postgres",
+            password="tesis123"
         )
         return conn
     except Exception as e:
