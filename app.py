@@ -1,20 +1,20 @@
 import streamlit as st
 import psycopg2
 def conectar_db():
-    st.write("Intentando conectar...") # Esto aparecerá en pantalla para saber que el botón funciona
     try:
+        # Usamos un timeout corto para que no se quede pensando para siempre
         conn = psycopg2.connect(
-            host="dncz6ejujh.loclx.io", # Verifica que este siga siendo el de tu pantalla negra
+            host="dncz6ejujh.loclx.io", 
             port=80,
             database="Consultorio_db",
             user="postgres",
             password="tesis123",
             connect_timeout=5
         )
-        st.success("¡Conexión establecida!")
         return conn
     except Exception as e:
-        st.error(f"DETALLE DEL ERROR: {e}")
+        # Esto forzará a que salga el mensaje en rojo si algo falla
+        st.error(f"Error detectado: {e}")
         return None
         
 st.sidebar.title("Menú Principal")
