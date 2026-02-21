@@ -2,9 +2,8 @@ import streamlit as st
 import psycopg2
 def conectar_db():
     try:
-        # Usamos un timeout corto para que no se quede pensando para siempre
         conn = psycopg2.connect(
-            host="1joc5l9nlm.loclx.io", 
+            host="1joc5l9nlm.loclx.io", # El host de tu foto actual
             port=80,
             database="Consultorio_db",
             user="postgres",
@@ -13,7 +12,6 @@ def conectar_db():
         )
         return conn
     except Exception as e:
-        # Esto forzará a que salga el mensaje en rojo si algo falla
         st.error(f"Error detectado: {e}")
         return None
         
