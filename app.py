@@ -10,7 +10,7 @@ def conectar_db():
             database="Consultorio_db",
             user="postgres",
             password="tesis123",
-            connect_timeout=20
+            connect_timeout=50
         )
         return conn
     except Exception as e:
