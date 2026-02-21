@@ -1,38 +1,49 @@
 import streamlit as st
 import psycopg2
-
 def conectar_db():
     return psycopg2.connect(
-        host="127.0.0.1",
+        host="127.0.0.1", 
         database="Consultorio_db",
         user="postgres",
         password="tesis123",
         port="5432"
     )
 
-st.title("🦷 Portal del Paciente - Clínica Dental")
+st.sidebar.title("Menú Principal")
+opcion = st.sidebar.selectbox("Selecciona una vista:", ["Portal Paciente", "Panel Dentista (Admin)"])
 
-id_buscar = st.text_input("Ingresa tu ID de Paciente:")
+if opcion == "Portal Paciente":
+    st.header("🦷 Portal del Paciente")
+    id_buscar = st.text_input("Ingresa tu ID de Paciente:")
+    if st.button("Consultar"):
+        pass
 
-if st.button("Consultar Historial"):
-    conn = conectar_db()
-    cur = conn.cursor()
-    query = """
-    SELECT p.nombre, p.apellido, h.alergias, h.padecimientos, h.fecha_registro
-    FROM pacientes p
-    JOIN historial_clinico h ON p.id_paciente = h.id_paciente
-    WHERE p.id_paciente = %s
-    """
-    cur.execute(query, (id_buscar,))
-    resultado = cur.fetchone()
+elif opcion == "Panel Dentista (Admin)":
+    st.header("👨‍⚕️ Panel de Control Odontológico")
     
-    if resultado:
-        st.success(f"Bienvenido, {resultado[0]} {resultado[1]}")
-        st.write(f"*Alergias:* {resultado[2]}")
-        st.write(f"*Padecimientos:* {resultado[3]}")
-        st.write(f"*Fecha de registro:* {resultado[4]}")
-    else:
-        st.error("Paciente no encontrado.")
-    
-    cur.close()
-    conn.close()
+    with st.expander("Registrar Nuevo Historial Clínico"):
+        id_paciente = st.number_input("ID del Paciente:", min_value=1)
+        alergias = st.text_area("Alergias:")
+        padecimientos = st.text_area("Padecimientos:")
+        observaciones = st.text_area("Observaciones Médicas:")
+        
+        if st.button("Guardar Registro"):
+            try:
+                conn = conectar_db()
+                cur = conn.cursor()
+                query = """
+                INSERT INTO historial_clinico (id_paciente, alergias, padecimientos, observaciones)
+                VALUES (%s, %s, %s, %s)
+                """
+                cur.execute(query, (id_paciente, alergias, padecimientos, observaciones))
+                conn.commit()
+                st.success("¡Historial registrado con éxito!")
+                cur.close()
+                conn.close()
+            except Exception as e:
+                st.error(f"Error al guardar: {e}")
+
+    if st.button("Ver Todos los Pacientes"):
+        conn = conectar_db()
+        df = st.dataframe(conn) 
+        st.write("Lista completa de historiales clínicos registrados.")
