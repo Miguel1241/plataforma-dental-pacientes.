@@ -11,7 +11,7 @@ def conectar_db():
             user="postgres",
             password="tesis123",
             sslmode='disable',
-            connect_timeout=20
+            options="-c search_path=public"
         )
         return conn
     except Exception as e:
