@@ -3,7 +3,7 @@ import psycopg2
 def conectar_db():
     try:
         conn = psycopg2.connect(
-            host="vgzmhpsa1u.loclx.io",
+            host="i2lsdudjty.loclx.io",
             port="80",
             database="Consultorio_db",
             user="bryan",
