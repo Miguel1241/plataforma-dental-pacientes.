@@ -3,7 +3,7 @@ import psycopg2
 def conectar_db():
     try:
         conn = psycopg2.connect(
-            host="dncz6ejujh.loclx.io",
+            host="dncz6ejujh.loclx.io", 
             port=80,
             database="Consultorio_db",
             user="postgres",
@@ -11,7 +11,8 @@ def conectar_db():
         )
         return conn
     except Exception as e:
-        st.error(f"Error de conexión: {e}")
+        # Esto nos dirá exactamente qué falta si falla
+        st.error(f"Error técnico: {e}") 
         return None
     
 st.sidebar.title("Menú Principal")
