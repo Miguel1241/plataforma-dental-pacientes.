@@ -4,7 +4,7 @@ def conectar_db():
     try:
         # Usamos un timeout corto para que no se quede pensando para siempre
         conn = psycopg2.connect(
-            host="dncz6ejujh.loclx.io", 
+            host="1joc5l9nlm.loclx.io", 
             port=80,
             database="Consultorio_db",
             user="postgres",
