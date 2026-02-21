@@ -24,6 +24,22 @@ if opcion == "Portal Paciente":
     st.header("🦷 Portal del Paciente")
     id_buscar = st.text_input("Ingresa tu ID de Paciente:")
     if st.button("Consultar"):
+        conn = conectar_db()
+        if conn:
+            cur = conn.cursor()
+            cur.execute("SELECT * FROM historial_clinico WHERE id_paciente = %s", (id_buscar,))
+            paciente = cur.fetchone()
+            
+            if paciente:
+                st.success(f"Paciente encontrado: {paciente}")
+                st.write(f"*Alergias:* {paciente[1]}")
+                st.write(f"*Padecimientos:* {paciente[2]}")
+                st.write(f"*Observaciones:* {paciente[3]}")
+            else:
+                st.warning("No se encontró ningún paciente con ese ID.")
+            
+            cur.close()
+            conn.close()
         pass
 
 elif opcion == "Panel Dentista (Admin)":
