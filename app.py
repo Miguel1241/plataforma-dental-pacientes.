@@ -6,7 +6,7 @@ def conectar_db():
         # Usamos tu nuevo túnel y aumentamos el timeout para evitar errores
         conn = psycopg2.connect(
             host="siivgtoqyz.loclx.io", 
-            port=5432,
+            port=80,
             database="Consultorio_db",
             user="postgres",
             password="tesis123",
