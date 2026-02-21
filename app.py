@@ -3,11 +3,11 @@ import psycopg2
 def conectar_db():
     try:
         conn = psycopg2.connect(
-            host="1joc5l9nlm.loclx.io", # Tu host actual de la foto 17bcfc18
+            host="", # Tu host actual de la foto 17bcfc18
             port=80,
-            database="Consultorio_db",
+            database=,
             user="postgres",
-            password="tesis123",
+            password="",
             connect_timeout=20 # Aumentamos a 20 para evitar el timeout
         )
         return conn
