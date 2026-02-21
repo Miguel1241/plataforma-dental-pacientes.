@@ -1,19 +1,22 @@
 import streamlit as st
 import psycopg2
 def conectar_db():
+    st.write("Intentando conectar...") # Esto aparecerá en pantalla para saber que el botón funciona
     try:
         conn = psycopg2.connect(
-            host="dncz6ejujh.loclx.io", # Verifica que este siga verde en Ubuntu
-            port=443, # Cambiamos a 443 para saltar bloqueos
+            host="dncz6ejujh.loclx.io", # Verifica que este siga siendo el de tu pantalla negra
+            port=80,
             database="Consultorio_db",
             user="postgres",
-            password="tesis123"
+            password="tesis123",
+            connect_timeout=5
         )
+        st.success("¡Conexión establecida!")
         return conn
     except Exception as e:
-        st.error(f"Error: {e}")
+        st.error(f"DETALLE DEL ERROR: {e}")
         return None
-    
+        
 st.sidebar.title("Menú Principal")
 opcion = st.sidebar.selectbox("Selecciona una vista:", ["Portal Paciente", "Panel Dentista (Admin)"])
 
