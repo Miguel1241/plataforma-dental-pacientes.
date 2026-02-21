@@ -3,16 +3,15 @@ import psycopg2
 def conectar_db():
     try:
         conn = psycopg2.connect(
-            host="dncz6ejujh.loclx.io", 
-            port=80,
+            host="dncz6ejujh.loclx.io", # Verifica que este siga verde en Ubuntu
+            port=443, # Cambiamos a 443 para saltar bloqueos
             database="Consultorio_db",
             user="postgres",
             password="tesis123"
         )
         return conn
     except Exception as e:
-        # Esto nos dirá exactamente qué falta si falla
-        st.error(f"Error técnico: {e}") 
+        st.error(f"Error: {e}")
         return None
     
 st.sidebar.title("Menú Principal")
