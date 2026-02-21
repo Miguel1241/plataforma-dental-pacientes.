@@ -1,14 +1,19 @@
 import streamlit as st
 import psycopg2
 def conectar_db():
-    return psycopg2.connect(
-        host="127.0.0.1", 
-        database="Consultorio_db",
-        user="postgres",
-        password="tesis123",
-        port="5432"
-    )
-
+    try:
+        conn = psycopg2.connect(
+            host="vgzmhpsa1u.loclx.io",
+            port="80",
+            database="odontologia",
+            user="bryan",
+            password="123"
+        )
+        return conn
+    except Exception as e:
+        st.error(f"Error de conexión: {e}")
+        return None
+    
 st.sidebar.title("Menú Principal")
 opcion = st.sidebar.selectbox("Selecciona una vista:", ["Portal Paciente", "Panel Dentista (Admin)"])
 
