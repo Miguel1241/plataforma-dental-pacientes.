@@ -10,7 +10,7 @@ def conectar_db():
             database="Consultorio_db",
             user="postgres",
             password="tesis123",
-            sslmode='require',
+            sslmode='disable',
             connect_timeout=20
         )
         return conn
